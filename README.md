@@ -98,4 +98,4 @@ Accept: application/json
 
 ## Sequelize Model
 
-![](https://github.com/BugsBound/express-auth-jwt/tree/master/db/blob/Model.png)
+![](https://github.com/BugsBound/express-auth-jwt/blob/master/db/Model.png)
