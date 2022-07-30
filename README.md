@@ -1,4 +1,4 @@
-# Node.js express.js Sequelize JWT REST API - Basic Project Skeleton
+# Node.js express.js Sequelize JWT - Basic Project Skeleton
 
 ## Getting started
 
@@ -96,6 +96,6 @@ GET http://localhost:3000/api/logout
 Accept: application/json
 ```
 
-## Sequelize Model
+## DB Model
 
 ![](https://github.com/BugsBound/express-auth-jwt/blob/master/db/Model.png)
