@@ -1,4 +1,4 @@
-const {User} = require('../db/models');
+const {User, Post} = require('../db/models');
 const bcrypt = require('bcrypt');
 const tokenService = require('./token.service')
 const UserDto = require('../dtos/user.dto')
@@ -73,6 +73,30 @@ class UserService {
     return this.userInfo(user)
   }
 
+  async getUsers() {
+    const users = await User.findAll({attributes: ['id', 'login'],raw: true})
+    console.log(users)
+    return users
+  }
+
+  async getUser(query) {
+    let user = await User.findOne({
+      where: {login: query},
+      attributes: ['id', 'login'],
+      raw: true
+    })
+
+    if (!user) {
+      throw ApiError.NotFound('User not found!')
+    }
+
+    const posts = await Post.findAll({
+      attributes: ['id', 'title'],
+      where: {user_id: user.id},
+      raw: true})
+
+    return {id: user.id, login: user.login, posts};
+  }
 }
 
 module.exports = new UserService();

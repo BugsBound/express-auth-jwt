@@ -47,11 +47,9 @@ class UserController {
   async refresh(req, res, next) {
     try {
       const {refreshToken} = req.session
-      console.log('!!!!!!!!!!<<<< OLD: ' + req.session.refreshToken)
       const userData = await userService.refresh(refreshToken)
       req.session.user = userData.user
       req.session.refreshToken = userData.refreshToken
-      console.log('!!!!!!!!!!>>>> NEW: ' + req.session.refreshToken)
       return res.json(userData)
 
     } catch (err) {
@@ -59,9 +57,21 @@ class UserController {
     }
   }
 
-  user(req, res, next) {
+  async getUsers(req, res, next) {
     try {
+      const users = await userService.getUsers();
+      return res.json(users)
+    } catch (err) {
+      next(err);
+    }
+  }
 
+  async getUserByLogin(req, res, next) {
+    try {
+      const userLogin = req.params.login;
+      console.log(userLogin)
+      const user = await userService.getUser(userLogin);
+      return res.json(user);
     } catch (err) {
       next(err);
     }
